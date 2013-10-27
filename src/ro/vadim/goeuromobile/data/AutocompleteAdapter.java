@@ -1,6 +1,10 @@
-package ro.vadim.goeuromobile;
+package ro.vadim.goeuromobile.data;
 
 import java.util.ArrayList;
+
+import ro.vadim.goeuromobile.R;
+import ro.vadim.goeuromobile.R.layout;
+import ro.vadim.goeuromobile.search.TripSearcher;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

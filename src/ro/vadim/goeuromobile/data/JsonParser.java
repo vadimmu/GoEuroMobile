@@ -1,4 +1,4 @@
-package ro.vadim.goeuromobile;
+package ro.vadim.goeuromobile.data;
 
 import java.io.IOException;
 import java.util.ArrayList;

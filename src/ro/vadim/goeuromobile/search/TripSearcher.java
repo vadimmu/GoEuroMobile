@@ -1,4 +1,4 @@
-package ro.vadim.goeuromobile;
+package ro.vadim.goeuromobile.search;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -9,6 +9,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
+
+import ro.vadim.goeuromobile.data.HttpRequester;
+import ro.vadim.goeuromobile.data.JsonParser;
 
 import android.os.AsyncTask;
 import android.os.Looper;
@@ -31,6 +34,10 @@ public class TripSearcher{
 	}
 	
 	public ArrayList<Map> getLocationData(String partialLocationString){
+		
+		partialLocationString = partialLocationString.split(",")[0].trim().toLowerCase();
+		partialLocationString.replaceAll(" ", "%");
+		
 		
 		String message = HttpRequester.sendGet("http://pre.dev.goeuro.de:12345/api/v1/suggest/position/en/name/"+partialLocationString);
 		

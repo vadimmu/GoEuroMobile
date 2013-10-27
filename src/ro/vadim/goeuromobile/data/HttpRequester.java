@@ -1,4 +1,4 @@
-package ro.vadim.goeuromobile;
+package ro.vadim.goeuromobile.data;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -12,22 +12,78 @@
         android:layout_alignParentLeft="true"
         android:text="Search" />
 
+    <AutoCompleteTextView
+        android:id="@+id/textDeparture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="74dp"
+        android:ems="10" />
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
         android:text="GoEuro"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <AutoCompleteTextView
-        android:id="@+id/textDeparture"
+        android:id="@+id/textArrival"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="74dp"
-        android:ems="10" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textDeparture"
+        android:layout_marginTop="31dp"
+        android:ems="10" >
 
+        <requestFocus />
+    </AutoCompleteTextView>
+
+    <TextView
+        android:id="@+id/textDepartureDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textArrival"
+        android:layout_marginTop="29dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/textArrivalDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textDepartureDate"
+        android:layout_marginTop="29dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/buttonDepartureDate"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textDepartureDate"
+        android:layout_alignBottom="@+id/textDepartureDate"
+        android:layout_alignParentRight="true"
+        android:text="Departure date" />
+
+    <Button
+        android:id="@+id/buttonArrivalDate"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textArrivalDate"
+        android:layout_alignBottom="@+id/textArrivalDate"
+        android:layout_alignLeft="@+id/buttonDepartureDate"
+        android:layout_alignParentRight="true"
+        android:text="Arrival date" />
+    
 </RelativeLayout>

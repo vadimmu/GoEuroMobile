@@ -24,11 +24,16 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080005;
+        public static final int action_settings=0x7f08000a;
+        public static final int buttonArrivalDate=0x7f080009;
+        public static final int buttonDepartureDate=0x7f080008;
         public static final int buttonSearch=0x7f080002;
         public static final int fragment_container=0x7f080000;
-        public static final int textDeparture=0x7f080004;
-        public static final int textView1=0x7f080003;
+        public static final int textArrival=0x7f080005;
+        public static final int textArrivalDate=0x7f080007;
+        public static final int textDeparture=0x7f080003;
+        public static final int textDepartureDate=0x7f080006;
+        public static final int textView1=0x7f080004;
         public static final int txtTitle=0x7f080001;
     }
     public static final class layout {
