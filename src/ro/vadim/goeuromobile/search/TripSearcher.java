@@ -18,12 +18,18 @@ import android.os.Looper;
 import android.util.Log;
 
 public class TripSearcher{
-
+	
+	
+	
 	private static TripSearcher searcher = null;
 	
 	private TripSearcher(){
 				
 	}
+	
+	
+	
+	
 	
 	public static TripSearcher getSearcher(){
 		
@@ -36,25 +42,26 @@ public class TripSearcher{
 	public ArrayList<Map> getLocationData(String partialLocationString){
 		
 		partialLocationString = partialLocationString.split(",")[0].trim().toLowerCase();
-		partialLocationString.replaceAll(" ", "%");
+		partialLocationString = partialLocationString.replace(" ", "%20");
 		
+		ArrayList<Map> locationList = null;
+		
+		if((partialLocationString == null)||(partialLocationString.length() == 0))
+			return locationList;
 		
 		String message = HttpRequester.sendGet("http://pre.dev.goeuro.de:12345/api/v1/suggest/position/en/name/"+partialLocationString);
 		
-		ArrayList<Map> locationList = null;
+		
 		
 		try {
 			
 			JsonParser parser = JsonParser.getParser();			
 			Map<String, Object> messageObject = parser.extractObject(message);
-			locationList = parser.extractArrayOfObjects(messageObject, "results");
-						
-			Log.i("GOT RESULTS !", locationList.toString());
-			
+			locationList = parser.extractArrayOfObjects(messageObject, "results");			
 		} 
 		
 		catch (NullPointerException e){
-			Log.e("testing parsing capabilities", e.toString());
+			Log.w("TripSearcher", "no location data available");
 		}
 		
 		finally{

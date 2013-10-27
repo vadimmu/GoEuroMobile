@@ -23,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -53,6 +54,9 @@ public class SearchFragment extends Fragment{
 	private TextView textArrivalDate = null;
 	
 	
+	
+	
+	
 	private void setupTimeButton(final TextView targetTextView){
 		
 		int[] dmy = Utils.getDDMMYYYY();
@@ -76,6 +80,43 @@ public class SearchFragment extends Fragment{
 		new DatePickerDialog(getActivity(), date, dmy[2], dmy[1], dmy[0]).show();
 		
 	}
+		
+	private void initAutocompletTextView(View view, final AutoCompleteTextView textView, final String defaultString){
+		
+		AutocompleteAdapter adapter = new AutocompleteAdapter(view.getContext(), defaultString);		
+		textView.setAdapter(adapter);		
+		textView.setThreshold(2);
+		
+		textView.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				
+				
+				String s = textView.getText().toString();
+				
+				if(hasFocus == false){
+					if(s.toString().trim().length() == 0){
+						if(defaultString != null)							
+							textView.setText(defaultString);
+						
+					}
+				}
+				
+				if(hasFocus == true){
+					
+					if(s.equals(defaultString)){
+						textView.getText().clear();
+					}
+				}
+				
+			}
+		});
+		
+	}
+	
+	
+	
 	
 	
 	private void initButtonArrivalDate(View view){
@@ -106,37 +147,30 @@ public class SearchFragment extends Fragment{
 
 	}
 	
-	
-	
-	
 	private void initTextDepartureDate(View view){		
 		textDepartureDate = (TextView) view.findViewById(R.id.textDepartureDate);
 		textDepartureDate.setText(Utils.getTodayString());		
 	}
+	
 	private void initTextArrivalDate(View view){
 		textArrivalDate = (TextView) view.findViewById(R.id.textArrivalDate);
 		textArrivalDate.setText(Utils.getTodayString());
-	}
+	}	
 	
-	
-	private void initAutocompletTextView(View view, AutoCompleteTextView textView){
-		
-		AutocompleteAdapter adapter = new AutocompleteAdapter(view.getContext());		
-		textView.setAdapter(adapter);		
-		textView.setThreshold(2);
-		
-	}
+
 	
 	private void initTextDeparture(View view){
 		
-		textDeparture = (AutoCompleteTextView) view.findViewById(R.id.textDeparture);		
-		initAutocompletTextView(view, textDeparture);
+		textDeparture = (AutoCompleteTextView) view.findViewById(R.id.textDeparture);
+		textDeparture.setText("From: ");
+		initAutocompletTextView(view, textDeparture, "From: ");
 	} 
 	
 	private void initTextArrival(View view){
 		
-		textArrival = (AutoCompleteTextView) view.findViewById(R.id.textArrival);		
-		initAutocompletTextView(view, textArrival);
+		textArrival = (AutoCompleteTextView) view.findViewById(R.id.textArrival);
+		textArrival.setText("To: ");		
+		initAutocompletTextView(view, textArrival, "To: ");
 	}
 	
 	private void initButtonSearch(View view){

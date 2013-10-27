@@ -3,10 +3,12 @@ package ro.vadim.goeuromobile.data;
 import java.util.ArrayList;
 
 import ro.vadim.goeuromobile.R;
+import ro.vadim.goeuromobile.Utils;
 import ro.vadim.goeuromobile.R.layout;
 import ro.vadim.goeuromobile.search.TripSearcher;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -15,10 +17,11 @@ public class AutocompleteAdapter extends ArrayAdapter<String> implements Filtera
     private ArrayList<String> resultList;
     private static final int DEFAULT_RESOURCE_ID = R.layout.list_item;
     
+    private String defaultString = null;
     
-    
-    public AutocompleteAdapter(Context context) {
+    public AutocompleteAdapter(Context context, String defaultString) {
         super(context, DEFAULT_RESOURCE_ID);
+        this.defaultString = defaultString;
     }
     
     @Override
@@ -30,10 +33,19 @@ public class AutocompleteAdapter extends ArrayAdapter<String> implements Filtera
     public String getItem(int index) {
         return resultList.get(index);
     }
-
-    
+        
     private ArrayList<String> autocomplete(String autocompleteString){
     	
+    	if(!Utils.isOnline())
+    		return new ArrayList<String>(0);
+    	
+    	
+    	if((autocompleteString.trim().equals(this.defaultString.trim())) ||
+    			((autocompleteString.length() < 2))){
+    				
+    		return new ArrayList<String>(0);
+    	}	
+    	    	
     	String[] suggestions = TripSearcher.getSearcher().
     							getSearchSuggestions(autocompleteString);
     	
@@ -42,10 +54,11 @@ public class AutocompleteAdapter extends ArrayAdapter<String> implements Filtera
     		results.add(suggestion);
     	}
     	
-    	return results; 
+    	return results;
+	    	
+	
     }
-    
-    
+        
     @Override
     public Filter getFilter() {
         Filter filter = new Filter() {

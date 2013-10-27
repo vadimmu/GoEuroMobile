@@ -13,10 +13,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonParser {
 	
-	
 	private static JsonParser parser = null;
 	
 	private ObjectMapper mapper = null;
+	
+	
+	
 	
 	
 	private JsonParser(){		
@@ -30,6 +32,8 @@ public class JsonParser {
 		
 		return parser;		
 	}
+	
+	
 	
 	
 	
@@ -88,8 +92,7 @@ public class JsonParser {
 		ArrayList<Map> childObjectList = (ArrayList<Map>)parentObject.get(tag);		
 		return childObjectList;		
 	}
-	
-	
+		
 	public Map<String, Object> extractObjectFromObject(Map<String, Object> parentObject, String tag){		
 		Map<String, Object> childObject = (Map<String, Object>) parentObject.get(tag);		
 		return childObject;

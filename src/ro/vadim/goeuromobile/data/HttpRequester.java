@@ -27,20 +27,15 @@ public class HttpRequester {
 	
 	public static String sendGet(String url){	
 		
+		String returnMessage = "";
 		
-		
-		String returnMessage = "";		
 		try {
 			
-		
 			if(httpClient == null)
 				httpClient = new DefaultHttpClient();
-			
-		
+					
 			httpGet = new HttpGet(url);
 			
-			
-		
 			HttpResponse response = httpClient.execute(httpGet);
 			
 			int responseCode = response.getStatusLine().getStatusCode();

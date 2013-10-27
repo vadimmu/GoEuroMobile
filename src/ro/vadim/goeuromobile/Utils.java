@@ -3,7 +3,10 @@ package ro.vadim.goeuromobile;
 import java.util.Calendar;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.View;
 
 public class Utils {
@@ -68,6 +71,20 @@ public class Utils {
 		return builder.create();
 	}
 	
+	
+	public static boolean isOnline() {
+		
+	    ConnectivityManager cm =
+	        (ConnectivityManager) MainActivity.getCurrentFragment().
+	        							getActivity().
+	        								getSystemService(
+	        										Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
+	}
 	
 	
 }
