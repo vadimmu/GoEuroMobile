@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment{
 	Button searchButton = null;
 	
 	
-	private ArrayList<String> suggestionsList = new ArrayList<String>(10);
+	private String[] suggestionsList = {};
 	
 	
 	private void initTextFrom(View view){
@@ -117,15 +117,12 @@ public class SearchFragment extends Fragment{
 			
 		});
 		
+		this.locationList.setAdapter(
+				new SearchAdapter(
+						this.getActivity(), 
+						suggestionsList));
 		
-		
-		locationList.setAdapter(new ArrayAdapter(
-				getActivity(),
-				android.R.layout.simple_list_item_1,
-				getSuggestionsList()));
-		
-		
-		((ArrayAdapter)locationList.getAdapter()).notifyDataSetChanged();
+		((SearchAdapter)locationList.getAdapter()).notifyDataSetChanged();
 		
 	}
 	private void initSearchButton(View view){
@@ -182,9 +179,11 @@ public class SearchFragment extends Fragment{
 			@Override
 			public void run() {
 				Log.i("SearchFragment", "updateLocationList()");
-				((ArrayAdapter)thisFragment.locationList.getAdapter()).notifyDataSetChanged();
-				thisFragment.locationList.invalidate();
-				thisFragment.locationList.refreshDrawableState();
+				
+				thisFragment.locationList.setAdapter(
+						new SearchAdapter(
+								thisFragment.getActivity(), 
+								suggestionsList));
 				
 			}
 		});
@@ -192,19 +191,18 @@ public class SearchFragment extends Fragment{
 		
 	}
 
-	public ArrayList<String> getSuggestionsList() {
+	public String[] getSuggestionsList() {
 		return suggestionsList;
 	}
 
 
 	public synchronized void setSuggestionsList(String[] suggestionsList) {
-		this.suggestionsList = new ArrayList<String>(suggestionsList.length);
+		this.suggestionsList = suggestionsList;
 		
 		String suggestions = "";
-		for(String suggestion:getSuggestionsList()){
-			this.suggestionsList.add(suggestion);
+		for(String suggestion:getSuggestionsList()){			
 			suggestions+=suggestion+'\n';
-		}		
+		}
 		Log.i("SearchFragment", "setSuggestionsList(): "+suggestions);
 	}
 	
