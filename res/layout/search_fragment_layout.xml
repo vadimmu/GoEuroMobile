@@ -3,49 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/textFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="106dp"
-        android:text="From"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="35dp"
-        android:text="GoEuro"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/textTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textFrom"
-        android:layout_marginTop="24dp"
-        android:text="To"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <ListView
-        android:id="@+id/listLocations"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textTo" >
-
-    </ListView>
-
+	
     <Button
         android:id="@+id/buttonSearch"
         android:layout_width="wrap_content"
@@ -53,5 +11,23 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="Search" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="GoEuro"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <AutoCompleteTextView
+        android:id="@+id/textDeparture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="74dp"
+        android:ems="10" />
 
 </RelativeLayout>

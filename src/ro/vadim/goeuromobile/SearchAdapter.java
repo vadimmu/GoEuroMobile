@@ -7,14 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
-public class SearchAdapter extends ArrayAdapter<String>{
+public class SearchAdapter extends ArrayAdapter<String> implements Filterable{
 
 	private static final int DEFAULT_RESOURCE_ID = R.layout.listview_item_row;	
     
 	Context context; 
-    int layoutResourceId = DEFAULT_RESOURCE_ID;  
+    int layoutResourceId = DEFAULT_RESOURCE_ID;
     String data[] = null;
     
     public SearchAdapter(Context context, String[] data) {    	

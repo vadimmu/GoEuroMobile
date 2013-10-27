@@ -18,7 +18,8 @@ public class UiUpdater {
 					
 					SearchFragment currentFragment = (SearchFragment) MainActivity.getCurrentFragment();
 					currentFragment.setSuggestionsList(suggestions);
-					currentFragment.updateLocationList();
+					//currentFragment.updateLocationList();
+					currentFragment.updateTextDeparture();
 				}
 			}
 		});
@@ -26,8 +27,4 @@ public class UiUpdater {
 		suggestionRetrieverThread.start();
 		
 	}
-	
-	
-	
-	
 }

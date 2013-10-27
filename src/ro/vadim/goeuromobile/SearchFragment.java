@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -32,99 +33,26 @@ import android.widget.Toast;
 
 public class SearchFragment extends Fragment{
 
-	EditText textFrom = null;
-	EditText textTo = null;
 	
-	ListView locationList = null;
+	AutoCompleteTextView textDeparture = null;
 	Button searchButton = null;
 	
 	
 	private String[] suggestionsList = {};
 	
 	
-	private void initTextFrom(View view){
-		
-		textFrom = (EditText)view.findViewById(R.id.textFrom);
-		
-		textFrom.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				
-								
-				if(textFrom.getText().length() >= 2){
-					
-					Log.i("SearchFragment", "textFrom: getting suggestions");
-					UiUpdater.getSearchSuggestions(textFrom.getText().toString());
-				}
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				
-			}
-		});		
-		
-		
-	}
 	
+	private void initTextDeparture(View view){
+		
+		textDeparture = (AutoCompleteTextView) view.findViewById(R.id.textDeparture);		
+		
+		AutocompleteAdapter adapter = new AutocompleteAdapter(view.getContext());
+		
+		textDeparture.setAdapter(adapter);
+		
+		textDeparture.setThreshold(2);
+	} 
 	
-	private void initTextTo(View view){
-		textTo = (EditText)view.findViewById(R.id.textTo);
-		textTo.setOnKeyListener(new OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				
-				if(textTo.getText().length() >= 2){
-					
-					
-				}
-				
-				return false;
-			}
-		});
-	}
-	
-	private void initLocationList(View view){
-		
-		locationList = (ListView)view.findViewById(R.id.listLocations);
-		locationList.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				
-				//arg2 is the index;`
-				locationList.invalidate();
-				
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				
-				
-			}
-			
-		});
-		
-		this.locationList.setAdapter(
-				new SearchAdapter(
-						this.getActivity(), 
-						suggestionsList));
-		
-		((SearchAdapter)locationList.getAdapter()).notifyDataSetChanged();
-		
-	}
 	private void initSearchButton(View view){
 		
 		searchButton = (Button)view.findViewById(R.id.buttonSearch);
@@ -139,10 +67,9 @@ public class SearchFragment extends Fragment{
 	}
 	
 	private void initComponents(View view){
-		initTextFrom(view);
-		initTextTo(view);
-		initLocationList(view);
+		
 		initSearchButton(view);
+		initTextDeparture(view);
 	}
 	
 	
@@ -157,39 +84,29 @@ public class SearchFragment extends Fragment{
 		return view;
 	}
 	
-	
-	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
 	
-
-
-	public synchronized void updateLocationList(){
 		
+	
+	public synchronized void updateTextDeparture(){
 		final SearchFragment thisFragment = this;
-		
-		
-		
 		getActivity().runOnUiThread(new Runnable() {
 			
 			@Override
 			public void run() {
-				Log.i("SearchFragment", "updateLocationList()");
+				ArrayAdapter<String> adapter = (ArrayAdapter)thisFragment.
+						textDeparture.getAdapter();
 				
-				thisFragment.locationList.setAdapter(
-						new SearchAdapter(
-								thisFragment.getActivity(), 
-								suggestionsList));
+				thisFragment.textDeparture.setAdapter(adapter);
 				
 			}
 		});
-		
-		
 	}
+	
 
 	public String[] getSuggestionsList() {
 		return suggestionsList;
